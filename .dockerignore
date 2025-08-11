@@ -1,0 +1,81 @@
+# Git and version control
+.git/
+.gitignore
+.github/
+
+# Documentation and project files
+README.md
+CLAUDE.md
+GOALS.md
+docs/
+*.md
+
+# Python cache and temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.tox/
+.coverage
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoint
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Large model files (should be mounted at runtime)
+models/FLUX.1-dev/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Results and outputs
+results/
+outputs/
+logs/
+*.log
+
+# Memory and coordination directories (Claude-specific)
+memory/
+coordination/
+.claude/
+.roo/
+.roomodes
+.serena/
+
+# Node.js (if any)
+node_modules/
+*.tar.xz
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp

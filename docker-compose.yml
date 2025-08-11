@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  characonsist:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+    image: characonsist:latest
+    container_name: characonsist-inference
+    
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONPATH=/workspace/characonsist
+      - HF_HOME=/workspace/.cache/huggingface
+      - TORCH_HOME=/workspace/.cache/torch
+    
+    # Volume mounts
+    volumes:
+      # Model storage (mount your FLUX.1-dev model here)
+      - ./models:/workspace/models:ro
+      # Results output
+      - ./results:/workspace/characonsist/results:rw
+      # Cache directories for efficiency
+      - hf_cache:/workspace/.cache/huggingface
+      - torch_cache:/workspace/.cache/torch
+      # Optional: Custom prompts
+      - ./examples:/workspace/characonsist/examples:ro
+    
+    # Port mapping for Jupyter notebooks
+    ports:
+      - "8888:8888"
+    
+    # Resource limits
+    shm_size: 8gb
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import torch; assert torch.cuda.is_available()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Working directory
+    working_dir: /workspace/characonsist
+    
+    # Default command (can be overridden)
+    command: ["bash"]
+
+volumes:
+  hf_cache:
+    driver: local
+  torch_cache:
+    driver: local
