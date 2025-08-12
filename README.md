@@ -49,6 +49,19 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
+### Docker Installation (Recommended)
+This project is also available as a Docker container on Docker Hub. This is the recommended way to run the project as it includes all the necessary dependencies and configurations.
+
+1.  **Pull the Docker image:**
+    ```bash
+    docker pull gemneye/characonsist-runpod:latest
+    ```
+2.  **Run the Docker container:**
+    ```bash
+    docker run -it --gpus all -p 8888:8888 -p 7860:7860 gemneye/characonsist-runpod:latest
+    ```
+    This will start the container and expose the Jupyter Lab on port 8888 and the Gradio interface on port 7860.
+
 ### Quick Start
 We provide two ways to use CharaConsist for generating consistent characters:
 
