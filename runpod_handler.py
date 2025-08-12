@@ -62,7 +62,16 @@ snapshot_download(
     local_dir="{model_dir}",
     token=os.getenv("HF_TOKEN"),
     resume_download=True,
-    max_retries=10
+    max_retries=10,
+    allow_patterns=[
+        "model_index.json",
+        "scheduler/*",
+        "text_encoder_2/*",
+        "tokenizer/*",
+        "tokenizer_2/*",
+        "transformer/*",
+        "vae/*"
+    ]
 )
 """
         subprocess.run([python_executable, "-c", download_script], check=True)
