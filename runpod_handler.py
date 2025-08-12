@@ -44,6 +44,8 @@ def setup_environment():
     subprocess.run([pip_executable, "install", "-r", str(requirements_file)], check=True)
     print("Installing Gradio...")
     subprocess.run([pip_executable, "install", "gradio"], check=True)
+    print("Upgrading huggingface_hub...")
+    subprocess.run([pip_executable, "install", "--upgrade", "huggingface_hub"], check=True)
 
     # 4. Download the model using HF_TOKEN
     hf_token = os.getenv("HF_TOKEN")
