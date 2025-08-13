@@ -34,7 +34,7 @@ def setup_environment():
             content = f.read()
             if 'opencv-python' not in content:
                 f.seek(0, 2)  # Go to the end of the file
-                f.write('\\nopencv-python')
+                f.write('\nopencv-python\n')
                 print("Patched requirements.txt with opencv-python.")
     except FileNotFoundError:
         print(f"Warning: {requirements_file_path} not found. Skipping dependency patch.")
