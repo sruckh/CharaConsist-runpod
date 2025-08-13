@@ -111,6 +111,8 @@ def launch_gradio():
     # Add the CharaConsist directory to the python path to resolve imports
     env = os.environ.copy()
     env["PYTHONPATH"] = f"{str(characonsist_dir)}:{env.get('PYTHONPATH', '')}"
+    # Set PYTHONUNBUFFERED to 1 to prevent output buffering
+    env["PYTHONUNBUFFERED"] = "1"
 
     subprocess.run([venv_python, gradio_script_path], env=env)
 
