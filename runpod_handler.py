@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 # Define the CharaConsist directory path as a global variable
-characonsist_dir = Path("/app/CharaConsist")
+characonsist_dir = Path("/workspace/CharaConsist")
 
 def setup_environment():
     """
@@ -116,5 +116,12 @@ def launch_gradio():
 
 
 if __name__ == "__main__":
+    # Force re-installation by removing the setup complete marker.
+    # This is to ensure that any changes to dependencies are applied.
+    setup_complete_marker = characonsist_dir / ".setup_complete"
+    if setup_complete_marker.exists():
+        setup_complete_marker.unlink()
+        print("Removed setup marker to force re-installation.")
+
     setup_environment()
     launch_gradio()
