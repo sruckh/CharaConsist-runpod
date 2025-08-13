@@ -27,7 +27,20 @@ def setup_environment():
             check=True
         )
 
-    # 2. Create and activate virtual environment
+    # 2. Add missing opencv-python dependency to the cloned repo's requirements
+    requirements_file_path = characonsist_dir / "requirements.txt"
+    try:
+        with open(requirements_file_path, 'r+') as f:
+            content = f.read()
+            if 'opencv-python' not in content:
+                f.seek(0, 2)  # Go to the end of the file
+                f.write('\\nopencv-python')
+                print("Patched requirements.txt with opencv-python.")
+    except FileNotFoundError:
+        print(f"Warning: {requirements_file_path} not found. Skipping dependency patch.")
+
+
+    # 3. Create and activate virtual environment
     venv_dir = characonsist_dir / "venv"
     if not venv_dir.exists():
         print("Creating virtual environment...")
@@ -40,14 +53,14 @@ def setup_environment():
     print("Upgrading pip...")
     subprocess.run([pip_executable, "install", "-U", "pip"], check=True)
 
-    # 3. Install Python dependencies
+    # 4. Install Python dependencies
     requirements_file = characonsist_dir / "requirements.txt"
     print("Installing requirements...")
     subprocess.run([pip_executable, "install", "-r", str(requirements_file)], check=True)
     print("Installing Gradio...")
     subprocess.run([pip_executable, "install", "gradio"], check=True)
 
-    # 4. Download the model using HF_TOKEN
+    # 5. Download the model using HF_TOKEN
     hf_token = os.getenv("HF_TOKEN")
     if not hf_token:
         print("WARNING: HF_TOKEN environment variable not set. Model download may fail.")
@@ -77,7 +90,7 @@ snapshot_download(
 """
         subprocess.run([python_executable, "-c", download_script], check=True)
 
-    # 5. Create marker file
+    # 6. Create marker file
     print("Setup complete.")
     setup_complete_marker.touch()
 
