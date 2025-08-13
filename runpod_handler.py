@@ -3,12 +3,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Define the CharaConsist directory path as a global variable
+characonsist_dir = Path("/workspace/CharaConsist")
+
 def setup_environment():
     """
     Clones the repository, creates a venv, installs dependencies,
     and downloads the model if not already done.
     """
-    characonsist_dir = Path("/workspace/CharaConsist")
     setup_complete_marker = characonsist_dir / ".setup_complete"
 
     if setup_complete_marker.exists():
