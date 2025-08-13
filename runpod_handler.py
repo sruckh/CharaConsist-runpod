@@ -82,16 +82,7 @@ snapshot_download(
     repo_id="black-forest-labs/FLUX.1-dev",
     local_dir="{model_dir}",
     token=os.getenv("HF_TOKEN"),
-    resume_download=True,
-    allow_patterns=[
-        "model_index.json",
-        "scheduler/*",
-        "text_encoder_2/*",
-        "tokenizer/*",
-        "tokenizer_2/*",
-        "transformer/*",
-        "vae/*"
-    ]
+    resume_download=True
 )
 """
         subprocess.run([python_executable, "-c", download_script], check=True)
