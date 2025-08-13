@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 # Define the CharaConsist directory path as a global variable
-characonsist_dir = Path("/workspace/CharaConsist")
+characonsist_dir = Path("/app/CharaConsist")
 
 def setup_environment():
     """
