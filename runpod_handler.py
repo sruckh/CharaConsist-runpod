@@ -27,15 +27,21 @@ def setup_environment():
             check=True
         )
 
-    # 2. Add missing opencv-python dependency to the cloned repo's requirements
+    # 2. Add missing dependencies to the cloned repo's requirements file
     requirements_file_path = characonsist_dir / "requirements.txt"
+    missing_deps = ['opencv-python', 'einops']
     try:
         with open(requirements_file_path, 'r+') as f:
             content = f.read()
-            if 'opencv-python' not in content:
-                f.seek(0, 2)  # Go to the end of the file
-                f.write('\nopencv-python\n')
-                print("Patched requirements.txt with opencv-python.")
+            # Move to the end of the file to append
+            f.seek(0, 2)
+            if not content.endswith('\n'):
+                f.write('\n')
+
+            for dep in missing_deps:
+                if dep not in content:
+                    f.write(f'{dep}\n')
+                    print(f"Patched requirements.txt with {dep}.")
     except FileNotFoundError:
         print(f"Warning: {requirements_file_path} not found. Skipping dependency patch.")
 
