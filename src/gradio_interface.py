@@ -1,3 +1,10 @@
+import sys
+import os
+print("--- Environment Debug Info ---")
+print(f"Python Executable: {sys.executable}")
+print(f"sys.path: {sys.path}")
+print(f"PYTHONPATH: {os.environ.get('PYTHONPATH')}")
+print("-----------------------------")
 import gradio as gr
 import torch
 import numpy as np
