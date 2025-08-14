@@ -29,7 +29,7 @@ def setup_environment():
 
     # 2. Add missing dependencies to the cloned repo's requirements file
     requirements_file_path = characonsist_dir / "requirements.txt"
-    missing_deps = ['opencv-python', 'einops', 'sentencepiece']
+    missing_deps = ['opencv-python', 'einops', 'sentencepiece', 'protobuf']
     try:
         with open(requirements_file_path, 'r+') as f:
             content = f.read()
